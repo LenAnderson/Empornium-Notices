@@ -33,7 +33,10 @@ class EmpNotices {
 				return this.handleSubscriptions(item);
 			}
 			case 'subscribed_collages': {
-				return this.handleCollages(item);
+				return this.handleTorrentTables(item);
+			}
+			case 'navmenu_notifications': {
+				return this.handleTorrentTables(item);
 			}
 			default: {
 				log('UNHANDLED: ', item);
@@ -80,7 +83,7 @@ class EmpNotices {
 
 
 
-	async handleCollages(item) {
+	async handleTorrentTables(item) {
 		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		$$(html, '.torrent_table').forEach(table=>{

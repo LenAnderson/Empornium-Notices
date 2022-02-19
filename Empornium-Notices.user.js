@@ -2,7 +2,7 @@
 // @name         Empornium - Notices
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/Empornium-Notices/raw/master/Empornium-Notices.user.js
-// @version      1.2.0
+// @version      1.3.0
 // @author       LenAnderson
 // @match        https://www.empornium.me/*
 // @match        https://www.empornium.is/*
@@ -82,7 +82,10 @@
 				return this.handleSubscriptions(item);
 			}
 			case 'subscribed_collages': {
-				return this.handleCollages(item);
+				return this.handleTorrentTables(item);
+			}
+			case 'navmenu_notifications': {
+				return this.handleTorrentTables(item);
 			}
 			default: {
 				log('UNHANDLED: ', item);
@@ -129,7 +132,7 @@
 
 
 
-	async handleCollages(item) {
+	async handleTorrentTables(item) {
 		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		$$(html, '.torrent_table').forEach(table=>{
