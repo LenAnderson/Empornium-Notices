@@ -27,16 +27,16 @@ class EmpNotices {
 	async handleItem(item) {
 		switch (item.id || item.href.replace(/^.*action=([^&]+).*$/, '$1')) {
 			case 'navmenu_inbox': {
-				return this.handleInbox(item);
+				return this.handleInbox($(item, 'a') || item);
 			}
 			case 'navmenu_subscriptions': {
-				return this.handleSubscriptions(item);
+				return this.handleSubscriptions($(item, 'a') || item);
 			}
 			case 'subscribed_collages': {
-				return this.handleTorrentTables(item);
+				return this.handleTorrentTables($(item, 'a') || item);
 			}
 			case 'navmenu_notifications': {
-				return this.handleTorrentTables(item);
+				return this.handleTorrentTables($(item, 'a') || item);
 			}
 			default: {
 				log('UNHANDLED: ', item);

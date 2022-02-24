@@ -2,7 +2,7 @@
 // @name         Empornium - Notices
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/Empornium-Notices/raw/master/Empornium-Notices.user.js
-// @version      1.3.0
+// @version      1.3.1
 // @author       LenAnderson
 // @match        https://www.empornium.me/*
 // @match        https://www.empornium.is/*
@@ -76,16 +76,16 @@
 	async handleItem(item) {
 		switch (item.id || item.href.replace(/^.*action=([^&]+).*$/, '$1')) {
 			case 'navmenu_inbox': {
-				return this.handleInbox(item);
+				return this.handleInbox($(item, 'a') || item);
 			}
 			case 'navmenu_subscriptions': {
-				return this.handleSubscriptions(item);
+				return this.handleSubscriptions($(item, 'a') || item);
 			}
 			case 'subscribed_collages': {
-				return this.handleTorrentTables(item);
+				return this.handleTorrentTables($(item, 'a') || item);
 			}
 			case 'navmenu_notifications': {
-				return this.handleTorrentTables(item);
+				return this.handleTorrentTables($(item, 'a') || item);
 			}
 			default: {
 				log('UNHANDLED: ', item);
