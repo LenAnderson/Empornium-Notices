@@ -48,7 +48,7 @@ class EmpNotices {
 
 
 	async handleInbox(item) {
-		const html = await getHtml(item.querySelector('a').href);
+		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		frag.appendChild($(html, '#content > .thin > .head'));
 		const content = $(html, '#content > .thin > .box.pad');
@@ -70,7 +70,7 @@ class EmpNotices {
 
 
 	async handleSubscriptions(item) {
-		const html = await getHtml(item.querySelector('a').href);
+		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		const head = Array.from(html.querySelectorAll('.head')).find(it=>!it.classList.contains('latest_threads'));
 		const body = head.nextElementSibling;

@@ -2,7 +2,7 @@
 // @name         Empornium - Notices
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/Empornium-Notices/raw/master/Empornium-Notices.user.js
-// @version      1.3.1
+// @version      1.3.2
 // @author       LenAnderson
 // @match        https://www.empornium.me/*
 // @match        https://www.empornium.is/*
@@ -97,7 +97,7 @@
 
 
 	async handleInbox(item) {
-		const html = await getHtml(item.querySelector('a').href);
+		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		frag.appendChild($(html, '#content > .thin > .head'));
 		const content = $(html, '#content > .thin > .box.pad');
@@ -119,7 +119,7 @@
 
 
 	async handleSubscriptions(item) {
-		const html = await getHtml(item.querySelector('a').href);
+		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
 		const head = Array.from(html.querySelectorAll('.head')).find(it=>!it.classList.contains('latest_threads'));
 		const body = head.nextElementSibling;

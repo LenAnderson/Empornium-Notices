@@ -2,7 +2,7 @@
 // @name         Empornium - Notices
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/Empornium-Notices/raw/master/Empornium-Notices.user.js
-// @version      1.3.1
+// @version      1.3.2
 // @author       LenAnderson
 // @match        https://www.empornium.me/*
 // @match        https://www.empornium.is/*
