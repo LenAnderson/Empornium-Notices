@@ -2,7 +2,7 @@
 // @name         Empornium - Notices
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/Empornium-Notices/raw/master/Empornium-Notices.user.js
-// @version      1.3.2
+// @version      1.3.3
 // @author       LenAnderson
 // @match        https://www.empornium.me/*
 // @match        https://www.empornium.is/*
@@ -56,7 +56,7 @@
 
 
 	async getNotices(root=null) {
-		const items = $$(root||document, '#nav_userinfo > ul > li.highlight, .alertbar > [href*="subscribed_collages"]');
+		const items = $$(root||document, '#nav_userinfo > ul > li.highlight, #navmenu_notifications, .alertbar > [href*="subscribed_collages"]');
 		const parts = await Promise.all(items.map(item=>this.handleItem(item)));
 		const thin = $('#content > .thin');
 		const h2 = $('#content > .thin > h2');

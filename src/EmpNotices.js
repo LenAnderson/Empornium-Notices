@@ -7,7 +7,7 @@ class EmpNotices {
 
 
 	async getNotices(root=null) {
-		const items = $$(root||document, '#nav_userinfo > ul > li.highlight, .alertbar > [href*="subscribed_collages"]');
+		const items = $$(root||document, '#nav_userinfo > ul > li.highlight, #navmenu_notifications, .alertbar > [href*="subscribed_collages"]');
 		const parts = await Promise.all(items.map(item=>this.handleItem(item)));
 		const thin = $('#content > .thin');
 		const h2 = $('#content > .thin > h2');
