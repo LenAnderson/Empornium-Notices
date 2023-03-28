@@ -50,7 +50,7 @@ class EmpNotices {
 	async handleInbox(item) {
 		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
-		frag.appendChild($(html, '#content > .thin > .head'));
+		frag.append($(html, '#content > .thin > .head'));
 		const content = $(html, '#content > .thin > .box.pad');
 		$(content, '#searchbox').remove();
 		const tbl = $(html, '#messageform table');
@@ -61,7 +61,7 @@ class EmpNotices {
 			tbl.nextSibling.remove();
 		}
 		$$(content, '#messageform > table > tbody > tr').filter(it=>!it.classList.contains('unreadpm')).forEach(it=>it.remove());
-		frag.appendChild(content);
+		frag.append(content);
 
 		return frag;
 	}
@@ -74,8 +74,8 @@ class EmpNotices {
 		const frag = document.createDocumentFragment();
 		const head = Array.from(html.querySelectorAll('.head')).find(it=>!it.classList.contains('latest_threads'));
 		const body = head.nextElementSibling;
-		frag.appendChild(head);
-		frag.appendChild(body);
+		frag.append(head);
+		frag.append(body);
 
 		return frag;
 	}
@@ -86,9 +86,28 @@ class EmpNotices {
 	async handleTorrentTables(item) {
 		const html = await getHtml(item.href);
 		const frag = document.createDocumentFragment();
+		const elements = [];
 		$$(html, '.torrent_table').forEach(table=>{
-			frag.appendChild(table.previousElementSibling);
-			frag.appendChild(table);
+			elements.push(table.previousElementSibling);
+			elements.push(table);
+			frag.append(table.previousElementSibling);
+			frag.append(table);
+		});
+
+		$$(frag, '.head > a').filter(it=>it.textContent.trim() == 'Clear').forEach(clearLink=>{
+			clearLink.addEventListener('click', async(evt)=>{
+				evt.preventDefault();
+				evt.stopPropagation();
+				const newHtml = await getHtml(clearLink.href);
+				elements.forEach(it=>it.remove());
+				const newFrag = document.createDocumentFragment();
+				$$(html, '.torrent_table').forEach(table=>{
+					elements.push(table.previousElementSibling);
+					elements.push(table);
+					newFrag.append(table.previousElementSibling);
+					newFrag.append(table);
+				});
+			});
 		});
 		
 		return frag;
